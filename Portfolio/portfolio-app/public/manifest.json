@@ -1,0 +1,16 @@
+{
+  "name": "Harish Sivakumar — Portfolio",
+  "short_name": "HS Portfolio",
+  "description": "Full Stack Engineer • AI • Cloud • Data Engineering",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1120",
+  "theme_color": "#2563EB",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+import { ExperienceItem } from '@/types';
+
+export const experiences: ExperienceItem[] = [
+  {
+    id: 'ziptier-fullstack',
+    company: 'ZipTier',
+    role: 'Full Stack Engineer',
+    location: 'Hybrid',
+    startDate: 'Jan 2026',
+    endDate: 'Present',
+    highlights: [
+      'Maintained and debugged 60+ production AWS Lambda functions powering AI chat, analytics, internal BI tools, and Stripe payment workflows; reduced mean incident resolution time by ~40% through structured root-cause analysis and CloudWatch Logs Insights.',
+      'Designed ETL pipelines, Materialized Views, and Stored Procedures across 30+ Redshift and 30+ DynamoDB tables, automating anomaly detection via Step Functions and SES, eliminating 10+ hours/week of manual reporting.',
+      'Engineered the core RAG pipeline — chunking, embedding, metadata filtering, semantic retrieval, and LLM guardrails — achieving ~200ms retrieval latency on document collections up to 25 MB.',
+      'Built 6–7 CloudWatch dashboards with 20+ operational widgets covering Lambda health, cold starts, throttling, and error trends, improving production observability to ~75–80% actionable coverage.',
+      'Designed GraphQL and REST APIs via AWS API Gateway; led incident management by defining severity levels, escalation workflows, and prioritization strategies across the engineering team.',
+    ],
+    technologies: ['AWS Lambda', 'Step Functions', 'Amazon Bedrock', 'Pinecone', 'Redshift', 'DynamoDB', 'GraphQL', 'API Gateway', 'Amazon SES'],
+    isCurrent: true,
+  },
+  {
+    id: 'ziptier-intern',
+    company: 'ZipTier',
+    role: 'AI Engineer Intern',
+    location: 'Hybrid',
+    startDate: 'Jun 2025',
+    endDate: 'Jan 2026',
+    highlights: [
+      'Built RAG-based retrieval workflows integrating Amazon Bedrock LLMs with Pinecone, improving context accuracy for the AI marketing assistant across 20–40 document collections.',
+      'Implemented prompt engineering and LLM orchestration pipelines, reducing hallucination rate and improving guided user interaction flows for 3+ distinct AI workflows.',
+      'Developed CloudWatch Logs Insights queries to surface Lambda bottlenecks and streaming failures, cutting average debugging time from hours to minutes for the engineering team.',
+    ],
+    technologies: ['Amazon Bedrock', 'Pinecone', 'Prompt Engineering', 'LLM Orchestration', 'CloudWatch Logs Insights'],
+    isCurrent: false,
+  },
+  {
+    id: 'cryptus',
+    company: 'Cryptus Cyber Security',
+    role: 'Trainee',
+    location: 'New Delhi, India',
+    startDate: 'Jun 2024',
+    endDate: 'May 2025',
+    highlights: [
+      'Completed comprehensive training and diploma in cyber security.',
+      'Gained practical knowledge in CCEH, CCNA, WAPT, and CCFI methodologies.',
+      'Developed foundational programming and automation skills using Python.',
+    ],
+    technologies: ['CCEH', 'CCNA', 'WAPT', 'CCFI', 'Python'],
+    isCurrent: false,
+  },
+  {
+    id: 'shadowfox',
+    company: 'ShadowFox',
+    role: 'Cyber Security Intern',
+    location: 'Chennai, India',
+    startDate: 'May 2024',
+    endDate: 'May 2024',
+    highlights: [
+      'Assisted in basic security analysis and vulnerability assessment tasks.',
+      'Gained exposure to real-world security operations and remote teamwork.',
+    ],
+    technologies: ['Security Analysis', 'Vulnerability Assessment'],
+    isCurrent: false,
+  },
+];
