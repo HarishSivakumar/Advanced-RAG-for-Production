@@ -14,20 +14,29 @@ export async function POST(req: NextRequest) {
     const indexName = process.env.PINECONE_INDEX || 'rag-index';
     const index = pinecone.Index(indexName);
 
-    // 2. Vector Search using Pinecone Integrated Inference
+    // 2. Vector Search + Reranking in a single Pinecone call (Fix 4)
+    // Strategy: broad ANN recall (topK=10) → reranker precision-scores → returns top 3
+    // Model: bge-reranker-v2-m3 (BAAI, free: 500 req/day on Pinecone Starter)
     const searchResponse = await index.namespace('default').searchRecords({
       query: {
         inputs: { text: latestMessage },
-        topK: 5
-      }
+        topK: 10,  // Broader recall to give the reranker more to work with
+      },
+      rerank: {
+        model: 'bge-reranker-v2-m3',
+        rankFields: ['text'],
+        topN: 3,   // After reranking, only keep the 3 most relevant chunks
+        query: latestMessage,
+      },
+      fields: ['text', 'source', 'chunkIndex'],
     });
 
-    // Extract the text from the top hits
+    // 3. Extract the reranked text chunks
     const hits = searchResponse.result?.hits || [];
-    const contextChunks = hits.map(hit => (hit as any).fields?.text || (hit as any).text || '').filter(Boolean);
+    const contextChunks = hits.map(hit => (hit as any).fields?.text || '').filter(Boolean);
     const contextString = contextChunks.join('\n\n---\n\n');
 
-    // 3. Assemble the RAG Prompt
+    // 4. Assemble the RAG Prompt
     const systemPrompt = `You are an expert enterprise AI assistant.
 Answer the user's question based strictly on the context provided below. 
 If the answer cannot be found in the context, politely state that you don't know based on the provided documents.
@@ -37,13 +46,13 @@ CONTEXT:
 ${contextString}
 `;
 
-    // 4. Sanitize messages — only pass role + content as plain strings to Groq
+    // 5. Sanitize messages — only pass role + content as plain strings to Groq
     const groqMessages = messages.map((m: any) => ({
       role: m.role as 'user' | 'assistant' | 'system',
       content: typeof m.content === 'string' ? m.content : (m.parts?.[0]?.text ?? ''),
     }));
 
-    // 5. Call Groq directly via native fetch (avoids Vercel AI SDK Responses API issues)
+    // 6. Call Groq directly via native fetch (avoids Vercel AI SDK Responses API issues)
     const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -66,7 +75,7 @@ ${contextString}
       throw new Error(`Groq API error: ${err}`);
     }
 
-    // 6. Stream SSE from Groq → parse → pipe plain text to client
+    // 7. Stream SSE from Groq → parse → pipe plain text to client
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {
