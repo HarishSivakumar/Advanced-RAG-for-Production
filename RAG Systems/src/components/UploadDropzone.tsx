@@ -115,6 +115,9 @@ export function UploadDropzone() {
 
       const response = await fetch('/api/ingest', {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_KEY}`
+        },
         body: formData,
       });
 
@@ -154,7 +157,10 @@ export function UploadDropzone() {
     try {
       const res = await fetch('/api/documents', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_KEY}`
+        },
         body: JSON.stringify({ id, filename })
       });
       

@@ -3,6 +3,8 @@ import { NextRequest } from 'next/server';
 
 export const maxDuration = 30;
 
+const NAMESPACE = 'tenant-primary';
+
 export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
@@ -17,7 +19,7 @@ export async function POST(req: NextRequest) {
     // 2. Vector Search + Reranking in a single Pinecone call (Fix 4)
     // Strategy: broad ANN recall (topK=10) → reranker precision-scores → returns top 3
     // Model: bge-reranker-v2-m3 (BAAI, free: 500 req/day on Pinecone Starter)
-    const searchResponse = await index.namespace('default').searchRecords({
+    const searchResponse = await index.namespace(NAMESPACE).searchRecords({
       query: {
         inputs: { text: latestMessage },
         topK: 10,  // Broader recall to give the reranker more to work with

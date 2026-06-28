@@ -38,7 +38,16 @@ function chunkText(text: string, chunkSize = 1000, overlap = 200): string[] {
   return chunks.filter(c => c.length > 50); // Filter out tiny garbage chunks
 }
 
+const NAMESPACE = 'tenant-primary';
+
 export async function POST(req: NextRequest) {
+  const authHeader = req.headers.get('Authorization');
+  const expectedToken = `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_KEY}`;
+  
+  if (!authHeader || authHeader !== expectedToken) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const results: Array<{
     file: string;
     status: 'success' | 'skipped' | 'error';
@@ -123,7 +132,7 @@ export async function POST(req: NextRequest) {
         const BATCH_SIZE = 50; 
         for (let i = 0; i < records.length; i += BATCH_SIZE) {
           const batch = records.slice(i, i + BATCH_SIZE);
-          await index.namespace("default").upsertRecords({
+          await index.namespace(NAMESPACE).upsertRecords({
             records: batch
           });
         }

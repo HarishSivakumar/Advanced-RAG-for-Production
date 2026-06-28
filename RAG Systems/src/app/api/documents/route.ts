@@ -22,8 +22,17 @@ export async function GET() {
   }
 }
 
+const NAMESPACE = 'tenant-primary';
+
 export async function DELETE(req: NextRequest) {
   try {
+    const authHeader = req.headers.get('Authorization');
+    const expectedToken = `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_KEY}`;
+    
+    if (!authHeader || authHeader !== expectedToken) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { id, filename } = await req.json();
 
     if (!id || !filename) {
@@ -36,7 +45,7 @@ export async function DELETE(req: NextRequest) {
     const index = pinecone.Index(indexName);
 
     // Pinecone serverless supports deleting by metadata
-    await index.namespace('default').deleteMany({
+    await index.namespace(NAMESPACE).deleteMany({
       filter: { source: filename }
     });
 

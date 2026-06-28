@@ -557,8 +557,8 @@ npm run dev
 
 | # | Limitation | Impact | Status |
 |---|---|---|---|
-| 1 | No authentication | Any user with the URL can upload/delete documents | 🔴 Open |
-| 2 | No per-user namespacing | All documents share a single Pinecone namespace | 🔴 Open |
+| 1 | ~~No authentication~~ | ~~Any user with the URL can upload/delete documents~~ | ✅ Fixed — Static API Key |
+| 2 | ~~No per-user namespacing~~ | ~~All documents share a single Pinecone namespace~~ | ✅ Fixed — `tenant-primary` |
 | 3 | ~~Chunk IDs are not collision-safe~~ | ~~Two files with identical names will overwrite each other's chunks~~ | ✅ Fixed — `crypto.randomUUID()` |
 | 4 | ~~No reranking~~ | ~~Top-5 results are returned by cosine similarity score only~~ | ✅ Fixed — `bge-reranker-v2-m3` |
 | 5 | ~~No idempotency on duplicate uploads~~ | ~~Re-uploading a file silently creates ghost vectors~~ | ✅ Fixed — Supabase idempotency check |
