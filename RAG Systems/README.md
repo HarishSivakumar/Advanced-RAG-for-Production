@@ -146,7 +146,7 @@ User selects PDF(s)
 │ Record Assembly                               │
 │  Each record:                                 │
 │  {                                            │
-│    id: "{filename}-chunk-{i}",                │
+│    id: "uuid-v4-string",         ← collision  │
 │    text: "<chunk content>",      ← embedded   │
 │    source: "{filename}",         ← filter key │
 │    chunkIndex: i,                             │
@@ -298,7 +298,7 @@ Each chunk is stored as an **integrated inference record** (no pre-computed vect
 
 ```json
 {
-  "id": "My-Document-pdf-chunk-0",
+  "id": "550e8400-e29b-41d4-a716-446655440000",
   "text": "The raw text content of this chunk...",
   "source": "My Document.pdf",
   "chunkIndex": 0,
