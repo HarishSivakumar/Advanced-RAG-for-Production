@@ -1,0 +1,98 @@
+import { SkillCategory } from '@/types';
+
+export const skillCategories: SkillCategory[] = [
+  {
+    id: 'frontend',
+    name: 'Frontend',
+    icon: 'Monitor',
+    color: '#2563EB',
+    skills: [
+      { name: 'React', proficiency: 95 },
+      { name: 'Next.js', proficiency: 92 },
+      { name: 'TypeScript', proficiency: 90 },
+      { name: 'Tailwind CSS', proficiency: 93 },
+      { name: 'FastAPI', proficiency: 85 },
+      { name: 'shadcn/ui', proficiency: 90 },
+    ],
+  },
+  {
+    id: 'backend',
+    name: 'Backend',
+    icon: 'Server',
+    color: '#0EA5E9',
+    skills: [
+      { name: 'Node.js', proficiency: 90 },
+      { name: 'Python', proficiency: 92 },
+      { name: 'REST APIs', proficiency: 92 },
+      { name: 'GraphQL', proficiency: 85 },
+      { name: 'CI/CD', proficiency: 85 },
+    ],
+  },
+  {
+    id: 'cloud',
+    name: 'Cloud & AWS',
+    icon: 'Cloud',
+    color: '#F59E0B',
+    skills: [
+      { name: 'AWS Lambda', proficiency: 92 },
+      { name: 'Step Functions', proficiency: 88 },
+      { name: 'API Gateway', proficiency: 87 },
+      { name: 'S3', proficiency: 90 },
+      { name: 'Amazon SES', proficiency: 85 },
+      { name: 'CloudWatch', proficiency: 88 },
+    ],
+  },
+  {
+    id: 'databases',
+    name: 'Databases & Data',
+    icon: 'Database',
+    color: '#22C55E',
+    skills: [
+      { name: 'PostgreSQL', proficiency: 90 },
+      { name: 'DynamoDB', proficiency: 88 },
+      { name: 'Redshift', proficiency: 85 },
+      { name: 'Supabase', proficiency: 85 },
+      { name: 'ETL Pipelines', proficiency: 82 },
+    ],
+  },
+  {
+    id: 'ai',
+    name: 'AI & ML',
+    icon: 'Brain',
+    color: '#A855F7',
+    skills: [
+      { name: 'scikit-learn', proficiency: 88 },
+      { name: 'TensorFlow', proficiency: 82 },
+      { name: 'NLP', proficiency: 85 },
+      { name: 'LLMs', proficiency: 92 },
+      { name: 'Transformers', proficiency: 85 },
+      { name: 'Prompt Engineering', proficiency: 90 },
+    ],
+  },
+  {
+    id: 'rag',
+    name: 'RAG & Vector DB',
+    icon: 'Database',
+    color: '#EC4899',
+    skills: [
+      { name: 'Pinecone', proficiency: 92 },
+      { name: 'LangChain', proficiency: 88 },
+      { name: 'Hugging Face', proficiency: 85 },
+      { name: 'Amazon Bedrock', proficiency: 88 },
+      { name: 'Sentence Transformers', proficiency: 85 },
+    ],
+  },
+  {
+    id: 'analytics',
+    name: 'Analytics',
+    icon: 'BarChart3',
+    color: '#F97316',
+    skills: [
+      { name: 'SQL', proficiency: 92 },
+      { name: 'Pandas', proficiency: 88 },
+      { name: 'NumPy', proficiency: 85 },
+      { name: 'Tableau', proficiency: 82 },
+      { name: 'Power BI', proficiency: 80 },
+    ],
+  },
+];
